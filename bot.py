@@ -11,19 +11,16 @@ import subprocess
 
 # 데이터셋 로드
 @st.cache_data()
-def load_data():
-    
+def load_data(): 
     # Git LFS 명령 실행
     lfs_file_path = "wine_data_with_predictions_v5.csv"
-    subprocess.run(["git", "lfs", "pull", lfs_file_path])
-    df = pd.read_csv('wine_data_with_predictions_v5.csv')
-    
+    lfs_file = subprocess.run(["git", "lfs", "pull", lfs_file_path])
+    df = pd.read_csv(lfs_file)
     # 가격 정수로 변환
     df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
     return df
 # 데이터 불러오기
 df = load_data()
-
 
 #사용자 입력값 전처리
 def preprocess_user_input(user_input):
