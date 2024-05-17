@@ -13,9 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 @st.cache_data()
 def load_data():
     df = pd.read_csv('wine_data_with_predictions_v5.csv')
-    
-    # 가격 정수로 변환
-    df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
     # wine_type 삭제
     # df.drop(columns=['wine_type'], inplace=True)
     # predicted_wine_type -> wine_type 이름 변경
@@ -24,6 +21,8 @@ def load_data():
 # 데이터 불러오기
 df = load_data()
 
+# 가격 정수로 변환
+df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
 
 #사용자 입력값 전처리
 def preprocess_user_input(user_input):
