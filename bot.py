@@ -13,12 +13,9 @@ import gdown
 # 데이터셋 로드
 @st.cache_data()
 def load_data(): 
-    # # Git LFS 명령 실행
-    # lfs_file_path = "lfs/wine_data_with_predictions_v5.csv"
-    # subprocess.run(["git", "lfs", "pull", "--include", lfs_file_path])
-    file_id = "1i5F_X_hfBtjmvIG3Cb3FSXa6KQX6ZOio"
+    url = "https://drive.google.com/uc?id=1i5F_X_hfBtjmvIG3Cb3FSXa6KQX6ZOio"
     output = "wine_data_with_predictions_v5.csv"
-    gdown.download(file_id, output, quiet=False)
+    gdown.download(url, output, quiet=False)
     df = pd.read_csv(output)
     # 가격 정수로 변환
     df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
