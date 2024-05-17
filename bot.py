@@ -8,6 +8,7 @@ import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import subprocess
+import requests
 
 # 데이터셋 로드
 @st.cache_data()
