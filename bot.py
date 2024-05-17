@@ -22,7 +22,7 @@ def load_data():
     return df
 # 데이터 불러오기
 df = load_data()
-print(df.head())
+print(st.write(df.head(10)))
 
 
 # #사용자 입력값 전처리
