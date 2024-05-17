@@ -8,7 +8,7 @@ import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import subprocess
-import requests
+import gdown
 
 # 데이터셋 로드
 @st.cache_data()
@@ -16,20 +16,10 @@ def load_data():
     # # Git LFS 명령 실행
     # lfs_file_path = "lfs/wine_data_with_predictions_v5.csv"
     # subprocess.run(["git", "lfs", "pull", "--include", lfs_file_path])
-
-    # 공유 링크에서 추출한 파일 ID
-    file_id = '1i5F_X_hfBtjmvIG3Cb3FSXa6KQX6ZOio'
-    # 다운로드 URL 생성
-    download_url = f'https://drive.google.com/uc?id={file_id}'
-    # 파일 다운로드
-    response = requests.get(download_url)
-    response.raise_for_status()  # 다운로드가 성공했는지 확인
-    # 파일 저장
-    file_path = 'wine_data_with_predictions_v5.csv'
-    with open(file_path, 'wb') as file:
-        file.write(response.content)
-    # 파일 읽기
-    df = pd.read_csv(file_path)
+    file_id = "1i5F_X_hfBtjmvIG3Cb3FSXa6KQX6ZOio"
+    output = "wine_data_with_predictions_v5.csv"
+    gdown.download(file_id, output, quiet=False)
+    df = pd.read_csv(output)
     # 가격 정수로 변환
     df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
     return df
