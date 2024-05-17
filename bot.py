@@ -32,6 +32,7 @@ def preprocess_user_input(user_input):
     user_input = user_input.translate(str.maketrans('', '', string.punctuation))
     # 불용어 제거
     stop_words = set(stopwords.words('english'))
+    stop_words.discard('USA')
     word_tokens = word_tokenize(user_input)
     user_input = [word for word in word_tokens if word not in stop_words]
     # 공백 제거 및 문자열로 병합
@@ -99,7 +100,7 @@ if "conversation_log" not in st.session_state:
 def has_dollar_sign(text):
     lowercase_text = text.lower()
     # 키워드 리스트
-    price_keywords = ["price", "cost", "priced", "dollar", "dollars", "$"]
+    price_keywords = ["price", "cost", "priced", "dollar", "dollars", "$", "expensive","pricey","costly","affordable","cheap","economical"]
     # 주어진 키워드가 입력값에 포함되어 있는지 확인
     contains_keyword = any(keyword in lowercase_text for keyword in price_keywords)
     return contains_keyword
