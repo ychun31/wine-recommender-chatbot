@@ -14,8 +14,8 @@ import subprocess
 def load_data(): 
     # Git LFS 명령 실행
     lfs_file_path = "lfs/wine_data_with_predictions_v5.csv"
-    subprocess.run(["git", "lfs", "pull", "--include", lfs_file_path])
-    df = pd.read_csv('wine_data_with_predictions_v5.csv')
+    down_file= subprocess.run(["git", "lfs", "pull", "--include", lfs_file_path])
+    df = pd.read_csv(down_file)
     # 가격 정수로 변환
     df['price_int'] = df['price'].str.extract(r'(\d+)').astype('int')
     return df
